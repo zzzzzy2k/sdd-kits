@@ -2,6 +2,8 @@
 
 > 同一套内核，三个领域包：**投资决策 / 通用开发 / 小说写作**。
 > 全部零依赖（纯 Python 标准库）、数据是本地 Markdown、每条纪律都有脚本兜底。
+>
+> 📦 <https://github.com/zzzzzy2k/sdd-kits>
 
 ---
 
