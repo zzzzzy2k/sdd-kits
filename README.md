@@ -32,7 +32,10 @@ SDD规范/
 ├── SDD设计方案.txt      ★ 三套的共同上游：最初的设计讨论稿
 ├── invest-sdd/          投资领域包
 ├── dev-sdd/             通用开发领域包
-└── novel-sdd/           小说写作领域包
+├── novel-sdd/           小说写作领域包
+├── skills/              三个 AI 技能定义（不存代码，只指向各自包）
+└── tools/
+    └── install-skills.py  把技能部署到 ~/.workbuddy/skills/
 ```
 
 每个包内部结构一致：
@@ -92,6 +95,48 @@ cd novel-sdd  && python bin/init_novel.py
 ```bash
 python bin/init_<领域>.py demo
 ```
+
+---
+
+## 安装为 AI 技能（可选）
+
+`skills/` 下是三个技能定义（`invest-sdd` / `dev-sdd` / `novel-sdd`），
+`tools/install-skills.py` 负责把它们部署到 `~/.workbuddy/skills/`。
+
+```bash
+python tools/install-skills.py           # 安装 / 更新
+python tools/install-skills.py --list    # 检查已装的技能，路径是否还有效
+```
+
+双击 `安装技能.bat` 也行。
+
+### 为什么技能里不存代码
+
+技能目录（C 盘）和本仓库（D 盘）是两处。如果把代码也复制进技能目录，就会出现
+**两份真源**——改哪一份？版本管理、备份、推 GitHub 全在仓库这边，技能目录那份会逐渐腐化。
+
+所以技能里只有：
+
+```
+~/.workbuddy/skills/<名字>/
+├── SKILL.md        说明 + 触发条件 + 铁律
+└── sdd-root.txt    一行：本仓库现在的绝对路径
+```
+
+**代码永远只有这一份。** 技能靠 `sdd-root.txt` 找过来。
+
+### 移动目录了怎么办
+
+整个 `SDD规范/` 随便搬。搬完重跑一次：
+
+```bash
+python tools/install-skills.py
+```
+
+它会重写所有 `sdd-root.txt`。**只修复路径失效的那几个**，其余的判为「未变」跳过。
+
+就算你忘了跑，技能里的 SKILL.md 也写了自愈步骤：读不到 `sdd-root.txt` 或路径失效时，
+会自动 Glob 搜索 `**/<包>/bin/guard_*.py`，找到后写回，找不到才来问你——**绝不会自己新建一个空目录**。
 
 ---
 
