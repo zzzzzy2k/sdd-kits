@@ -1,0 +1,27 @@
+# ── 换行符策略 ────────────────────────────────────────────────────────────
+# 仓库内统一存 LF，检出时按下面的规则转换。
+# 不写这个文件的话，换行会随每个人的 core.autocrlf 设置漂移，
+# 而 .bat 一旦被检出成 LF，cmd 会吞掉每行行首字符（setlocal → local）。
+
+* text=auto
+
+# 批处理必须是 CRLF —— 这是硬要求，不受任何人本地配置影响
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# 脚本与文档保持 LF
+*.py   text eol=lf
+*.md   text eol=lf
+*.txt  text eol=lf
+*.json text eol=lf
+.gitignore     text eol=lf
+.gitattributes text eol=lf
+
+# ── 二进制 ────────────────────────────────────────────────────────────────
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.apk  binary
+*.keystore binary

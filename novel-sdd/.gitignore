@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# 护栏运行时快照（本地状态，不入库）
+.state/
+
+# 正文与设定不入库（如果要给这个目录建 git 仓库）
+worlds/*/
+stories/*/
+chapters/*/
+!worlds/_templates/
+!stories/_templates/
+!chapters/_templates/
+
+# 系统垃圾
+Thumbs.db
+.DS_Store
+desktop.ini
